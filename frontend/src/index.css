@@ -1,0 +1,107 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply font-body bg-neutral text-neutral-900;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-heading font-bold;
+  }
+}
+
+@layer components {
+  
+  .btn-primary {
+    @apply bg-primary text-white px-6 py-3 rounded-lg font-semibold 
+           hover:bg-primary-dark transition-colors duration-200 
+           shadow-md hover:shadow-lg;
+  }
+  
+  
+  .btn-secondary {
+    @apply bg-white text-primary border-2 border-primary px-6 py-3 
+           rounded-lg font-semibold hover:bg-primary hover:text-white 
+           transition-all duration-200;
+  }
+  
+  
+  .btn-accent {
+    @apply bg-secondary text-white px-6 py-3 rounded-lg font-semibold 
+           hover:bg-secondary-dark transition-colors duration-200 
+           shadow-md hover:shadow-lg;
+  }
+  
+  
+  .card {
+    @apply bg-white rounded-xl shadow-md hover:shadow-xl 
+           transition-shadow duration-300 p-6;
+  }
+  
+  
+  .input-field {
+    @apply w-full px-4 py-3 border-2 border-neutral-200 rounded-lg 
+           focus:border-primary focus:outline-none transition-colors;
+  }
+  
+  
+  .badge {
+    @apply inline-block bg-accent text-neutral-900 px-3 py-1 
+           rounded-full text-sm font-semibold;
+  }
+}
+
+
+.leaflet-container {
+  height: 100%;
+  width: 100%;
+  border-radius: 12px;
+}
+
+.leaflet-popup-content-wrapper {
+  @apply rounded-lg shadow-xl;
+}
+
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-neutral-200;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-primary rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-primary-dark;
+}
+
+
+.leaflet-container {
+  font-family: inherit;
+}
+
+.custom-marker,
+.user-marker {
+  background: transparent !important;
+  border: none !important;
+}
+
+
+.leaflet-popup-content-wrapper {
+  padding: 0;
+  border-radius: 8px;
+}
+
+.leaflet-popup-content {
+  margin: 0;
+  width: auto !important;
+}
