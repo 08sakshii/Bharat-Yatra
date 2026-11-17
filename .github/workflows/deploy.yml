@@ -1,0 +1,44 @@
+name: Deploy to EC2
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      - name: Build frontend
+        working-directory: frontend
+        run: |
+          npm ci
+          npm run build
+
+      - name: Put build into backend
+        run: |
+          rm -rf backend/dist
+          cp -r frontend/dist backend/dist
+
+      - name: Set up SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.EC2_SSH_KEY }}" > ~/.ssh/key.pem
+          chmod 600 ~/.ssh/key.pem
+          ssh-keyscan -H ${{ secrets.EC2_HOST }} >> ~/.ssh/known_hosts
+
+      - name: Upload backend
+        run: |
+          rsync -az --delete --exclude node_modules --exclude .env \
+            -e "ssh -i ~/.ssh/key.pem" \
+            backend/ ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }}:~/backend/
+
+      - name: Install and restart
+        run: |
+          ssh -i ~/.ssh/key.pem ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} \
+            "cd ~/backend && npm ci --omit=dev && pm2 restart bharat-yatra"
