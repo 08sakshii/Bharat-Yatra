@@ -189,9 +189,10 @@ export const optimizeRouteNearestNeighbor = (places, start) => {
 };
 
 export const STORAGE_KEYS = {
-  AUTH_TOKEN: "auth_token",
-  USER_DATA: "user_data",
-  THEME: "theme_preference",
+  AUTH_TOKEN: "#F4B400",
+  USER_DATA: "#8B4513",
+  THEME: "#00CED1",
+  LAST_LOCATION: "lastLocation",
 };
 
 export const storage = {

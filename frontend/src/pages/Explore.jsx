@@ -27,6 +27,7 @@ const Explore = () => {
     loading: locationLoading,
     requestLocation,
     updateLocation,
+    clearLocation,
     hasLocation,
     needsPermission,
   } = useLocation();
@@ -141,6 +142,11 @@ const Explore = () => {
     await updateLocation(locationData, displayName);
   };
 
+  const handleChangeLocation = () => {
+    setPlaces([]);
+    clearLocation();
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#021E1B] via-[#033830] to-[#021E1B] text-white overflow-x-hidden">
       {}
@@ -149,6 +155,15 @@ const Explore = () => {
           onLocationGranted={handleLocationGranted}
           onManualLocation={handleManualLocation}
         />
+      )}
+
+      {/* Change location button */}
+      {hasLocation && (
+        <button
+          onClick={handleChangeLocation}
+          className="fixed bottom-4 left-4 z-40 bg-[#F4B400] text-[#021E1B] px-4 py-2 rounded-full text-sm font-semibold shadow-lg hover:brightness-110 transition">
+          📍 Change location
+        </button>
       )}
 
       {}
